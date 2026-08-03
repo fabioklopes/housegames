@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block titulo %}Lobby - Caça-Palavras{% endblock %}
+{% block cabecalho %}Sala de espera{% endblock %}
+{% block conteudo %}
+<div class="cartao" style="text-align:center;">
+    <h2>Escaneie para entrar</h2>
+    <img src="{% url 'cacapalavras_qrcode' codigo=partida.codigo %}" alt="QR Code da partida"
+         style="border-radius:16px; background:#fff; padding:8px; width:220px; height:220px;">
+    <p>Código da partida: <strong>{{ partida.codigo }}</strong></p>
+    <h3>Jogadores (<span id="total-jogadores">0</span>/{{ partida.max_jogadores }})</h3>
+    <ul id="lista-jogadores"></ul>
+    {% if e_host %}
+    <button class="botao" id="btn-iniciar" disabled>Iniciar partida</button>
+    <p id="msg-iniciar" class="erro"></p>
+    {% else %}
+    <p>Aguardando o anfitrião iniciar a partida...</p>
+    {% endif %}
+</div>
+{% endblock %}
+{% block rodape %}
+<a class="botao" href="{% url 'cacapalavras_criar' %}">Novo</a>
+{% endblock %}
+{% block js_extra %}
+<script>
+    const E_HOST = {{ e_host|yesno:"true,false" }};
+    const URL_STATUS = "{% url 'cacapalavras_lobby_status' codigo=partida.codigo %}";
+    const URL_INICIAR = "{% url 'cacapalavras_iniciar' codigo=partida.codigo %}";
+    const URL_DESTINO = {% if e_host %}"{% url 'cacapalavras_painel_host' codigo=partida.codigo %}"{% else %}"{% url 'cacapalavras_jogo' codigo=partida.codigo %}"{% endif %};
+</script>
+<script src="{% static 'cacapalavras/js/lobby.js' %}"></script>
+{% endblock %}

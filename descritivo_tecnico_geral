@@ -1,0 +1,78 @@
+HOUSE GAMES
+==========================================================================================
+
+OBJETIVO
+------------------------------------------------------------------------------------------
+Criar um jogo interativo onde vários jogadores podem compartilhar e interagir no mesmo jogo através do compartilhamento
+de um QR Code. Há uma quantidade limite de participantes: 8. Há também um ranking de qualificação e classificação por
+pontos.
+
+
+TECNOLOGIAS
+------------------------------------------------------------------------------------------
+Serão usados: Python (versão 3.13.14), Django (6.0.7), SQLite (x.x.x), HTML 5, CSS 3 e Javascript ECMAScript 2026 (ES2026)
+para que qualquer navegador de internet possa interpretar os comandos.
+
+
+JOGOS DISPONÍVEIS
+------------------------------------------------------------------------------------------
+1. Jogo da Velha (2 ou 4 jogadores)
+2. Forca (8 jogadores)
+3. Desembaralha (8 jogadores)
+4. LigMix (8 jogadores
+5. Caça-Palavras (8 jogadores)
+6. Palavras Cruzadas (8 jogadores)
+7. SomaMais (8 jogadores)
+8. Multiplex (8 jogadores)
+
+
+REGRA DE NEGÓCIOS
+------------------------------------------------------------------------------------------
+1. Um servidor será o gerenciador geral de todas as informações, principalmente também por gerar o QR Code dos jogos;
+
+2. Um jogador irá selecionar um determinado jogo e, em seguida, irá informar a quantidade de jogadores desta modalidade.
+Dadas as informações, o servidor irá gerar quadros de telas compartilhadas da modalidade do jogo. Ou seja, o servidor irá
+gerenciar a tela de exibição para se adequar à quantidade de jogadores no momento. Se for uma quantidade ímpar, improvisar
+a tela com uma quantidade par, máxima, na parte superior e o restante (ímpar) na parte inferior da tela;
+
+3. Cada tela de jogo deverá conter - obrigatoriamente - os seguintes ícones:
+3.1. Início - que servirá para sair do jogo atual e voltar para o hub de games disponíveis. Este ícone estará sempre
+     disponível no canto superior esquerdo;
+3.2. Novo/Reiniciar - este vai se alternar durante o jogo: se não iniciado, ícone "Novo". Se já iniciado, ícone "Reiniciar".
+     Este ícone estará sempre disponível na parte central inferior da tela;
+
+4. Durante a execução da aplicação, uma barra superior e inferior deverão ser respeitadas para que alguns ícones sejam
+   exibidos. Quem irá gerenciar os espaçamentos entre elas será o servidor. Entenda os itens 3.1 e 3.2 nestas áreas
+   exclusivas;
+
+5. A tela de hub de jogos deverá exibir uma tela atraente, bastante colorida e cheia de efeitos especiais para que os
+usuários e jogadores possam se sentir atraídos a continuar no jogo sem se sentirem entediados. Esta tela deverá conter:
+5.1. Um ícone para o hub de jogos - ao ser selecionado, apresentar os jogos disponíveis;
+5.2. Um ícone para o ranking de jogares atuais - mostrar as pontuações dos jogadores em uma tabela por modalidade e uma
+     linha para o total;
+5.3. Um ícone para reiniciar a seção dos jogares - ao ser selecionado, o ranking será zerado em todas as modalidades;
+5.4. Um ícone para reestabelecer uma nova seção de jogares - ao ser selecionado, os jogadores deverão ser registrados
+     novamente. Gerenciar essa informação nos caches/cookies de cada dispositivo conectado;
+
+6. Todos os games do hub deverão conter 3 níveis: fácil (5 pontos), médio (15 pontos) e difícil (30 pontos). Todos os
+   jogos deverão seguir esta ordem. Cada jogador deverá percorrer essa trilha para que, só então, ganhe as pontuações
+   máximas e um troféu da modalidade simbolizando que, esta modalidade possui um vencedor. Cada jogador pode colecionar
+   troféus e debaixo de cada avatar, que será gerado pelo servidor de forma animada e lúdica, que será enviada pelo jogador
+   no momento de registro do jogador da seção atual. Ou enviado por seleção de imagem, ou por foto (selfie). Caso seja
+   uma foto, ela deverá ser armazenada em "uploads/temp/avatar" e após encerradas as seções ou, quando a aplicação iniciar
+   novamente, essa pasta deverá ser esvaziada para - só então - começar uma nova seção para os atuais jogadores. A cada
+   finalização de game - havendo um vencedor - sugerir avançar o nível do game para que a pontuação continue a fim de que
+   possa ser garantido o troféu da modalidade.
+
+7. Todos os games deverão usar as palavras da Língua Portuguesa Brasileira (pt-br) respeitando a nova regra ortográfica
+   para gerar os games e gerenciar os textos de exibição. Quanto à tipografia, use a fonte Arial Rounded para exibição de
+   textos e resultados, e a fonte Courier New para os casos de jogos de matemática no momento de jogo.
+
+8. Todos os games deverão respeitar a contagem de tempo "regressiva" da seguinte maneira:
+8.1. Nível Fácil: 120 segundos;
+8.2. Nível Médio: 90 segundos;
+8.3. Nível Difícil: 45 segundos;
+8.4. Quando, na contagem regressiva, faltar 10 segundos, o temporizador deverá pulsar na tela alternando o tamanho e as
+     cores entre: branco (no formato original e quando estiver no tamanho original) e vermelho com borda branca e shadow
+     vermelho para branco (quando atingir o tamanho máximo maior). O temporizador, quando no ZERO, deverá ser exibido em
+     tamanho ligeiramente maior, em vermelho com borda branca. A pulsação deverá ser sutil.

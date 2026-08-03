@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block titulo %}Caça-Palavras - Jogo{% endblock %}
+{% block cabecalho %}Fase {{ rodada.fase }} · Nível {{ rodada.nivel|capfirst }}{% endblock %}
+{% block css_extra %}
+<link rel="stylesheet" href="{% static 'cacapalavras/css/jogo.css' %}">
+{% endblock %}
+{% block conteudo %}
+<div class="painel-jogo">
+    <div class="coluna-tabuleiro">
+        <div id="timer" class="timer">{{ tempo_restante }}</div>
+        <div id="placar" class="placar">Pontos: <span id="pontos-valor">{{ quadro.pontos_rodada }}</span></div>
+        <div id="grid" class="grid-cacapalavras" style="--tamanho:{{ tamanho_grid }};">
+            {% for linha in grid %}
+            {% for letra in linha %}
+            <div class="celula" data-r="{{ forloop.parentloop.counter0 }}" data-c="{{ forloop.counter0 }}">{{ letra }}</div>
+            {% endfor %}
+            {% endfor %}
+        </div>
+    </div>
+    <div class="coluna-lista">
+        <h3>Encontre as palavras</h3>
+        <ul id="lista-palavras" class="lista-palavras">
+            {% for item in lista_palavras %}
+            <li data-palavra="{{ item.palavra }}" class="{% if item.encontrada %}encontrada{% endif %}">{{ item.palavra }}</li>
+            {% endfor %}
+        </ul>
+        <div id="oponentes" class="oponentes"></div>
+    </div>
+</div>
+{% endblock %}
+{% block rodape %}
+<a class="botao" href="{% url 'cacapalavras_criar' %}">Reiniciar</a>
+{% endblock %}
+{% block js_extra %}
+<script>
+    const TEMPO_TOTAL = {{ tempo_total }};
+    let TEMPO_RESTANTE = {{ tempo_restante }};
+    const URL_VALIDAR = "{% url 'cacapalavras_validar' codigo=partida.codigo %}";
+    const URL_ESTADO = "{% url 'cacapalavras_estado' codigo=partida.codigo %}";
+    const URL_RESULTADO = "{% url 'cacapalavras_resultado' codigo=partida.codigo %}";
+</script>
+<script src="{% static 'cacapalavras/js/jogo.js' %}"></script>
+{% endblock %}

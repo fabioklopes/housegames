@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block titulo %}{{ titulo }}{% endblock %}
+{% block cabecalho %}{{ titulo }}{% endblock %}
+{% block conteudo %}
+<div class="cartao" style="text-align:center;">
+    <p>{{ mensagem }}</p>
+    <form method="post">
+        {% csrf_token %}
+        <button class="botao" type="submit">Confirmar</button>
+    </form>
+    <a class="botao" href="{% url 'hub_index' %}" style="margin-top:10px; background:#845EC2;">Cancelar</a>
+</div>
+{% endblock %}

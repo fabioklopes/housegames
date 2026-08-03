@@ -4,6 +4,7 @@ from pathlib import Path
 import cacapalavras
 import desembaralha
 import forca
+import hub
 import jogodavelha
 import ligmix
 import multiplex
@@ -23,8 +24,14 @@ SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env.bool('DEBUG', default=False)
+ALLOWED_HOSTS = ['*', '192.168.0.*']
 
-ALLOWED_HOSTS = ['*']
+# Permite acesso via túneis ngrok (URL pública muda a cada sessão gratuita).
+CSRF_TRUSTED_ORIGINS = [
+    'https://*.ngrok-free.dev',
+    'https://*.ngrok-free.app',
+    'https://*.ngrok.io',
+]
 
 
 # Application definition
@@ -37,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'hub',
     'cacapalavras',
     'desembaralha',
     'forca',
@@ -62,8 +70,8 @@ ROOT_URLCONF = 'core.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
-        'APP_DIRS': False,
+        'DIRS': [BASE_DIR / 'templates'],
+        'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.request',
@@ -128,3 +136,5 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

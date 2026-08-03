@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block titulo %}Ranking{% endblock %}
+{% block cabecalho %}Ranking dos jogadores{% endblock %}
+{% block conteudo %}
+<div class="cartao">
+    <table class="tabela-resultado">
+        <thead>
+        <tr><th>Jogador</th><th>Caça-Palavras</th><th>Total</th></tr>
+        </thead>
+        <tbody>
+        {% for linha in linhas %}
+        <tr>
+            <td>{{ linha.apelido }}</td>
+            <td>{{ linha.pontos_cacapalavras }}</td>
+            <td><strong>{{ linha.pontos_total }}</strong></td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="3">Nenhum jogador cadastrado ainda.</td></tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <a class="botao" href="{% url 'hub_index' %}">Voltar</a>
+</div>
+{% endblock %}

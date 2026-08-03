@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block titulo %}House Games{% endblock %}
+{% block cabecalho %}House Games{% endblock %}
+{% block conteudo %}
+<div class="cartao">
+    <div class="barra-icones-hub">
+        <a href="{% url 'hub_index' %}" title="Hub de jogos">🎮<span>Jogos</span></a>
+        <a href="{% url 'hub_ranking' %}" title="Ranking dos jogadores">🏆<span>Ranking</span></a>
+        <a href="{% url 'hub_reiniciar_sessao' %}" title="Reiniciar a seção dos jogadores">🔄<span>Reiniciar seção</span></a>
+        <a href="{% url 'hub_nova_secao' %}" title="Nova seção">🆕<span>Nova seção</span></a>
+    </div>
+    <h1>Bem-vindo ao House Games!</h1>
+    <p>Escolha um jogo para começar:</p>
+    <ul class="lista-jogos">
+        {% for jogo in jogos_disponiveis %}
+        <li><a class="botao" href="{% url jogo.url %}">{{ jogo.nome }}</a></li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

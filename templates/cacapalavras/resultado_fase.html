@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block titulo %}Resultado da fase{% endblock %}
+{% block cabecalho %}Resultado da Fase {{ rodada.fase }}{% endblock %}
+{% block conteudo %}
+<div class="cartao">
+    {% if houve_desempate %}
+    <p>Houve empate no último lugar: uma rodada extra de desempate (1 palavra) decidiu quem foi eliminado.</p>
+    {% endif %}
+    <table class="tabela-resultado">
+        <thead>
+        <tr><th>Jogador</th><th>Palavras encontradas</th><th>Pontos na fase</th></tr>
+        </thead>
+        <tbody>
+        {% for quadro in quadros %}
+        <tr class="{% if quadro.participante.eliminado %}linha-eliminado{% endif %}">
+            <td>{{ quadro.participante.jogador.apelido }}{% if quadro.participante.eliminado %} 🚫{% endif %}</td>
+            <td>{{ quadro.contar_encontradas }}/{{ quadro.lista_palavras|length }}</td>
+            <td>{{ quadro.pontos_rodada }}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    {% if participante.eliminado %}
+    <p class="erro">Você foi eliminado nesta fase. Obrigado por jogar!</p>
+    <a class="botao" href="{% url 'hub_index' %}">Voltar ao hub</a>
+    {% elif proxima_rodada_disponivel %}
+    <a class="botao" href="{% url 'cacapalavras_jogo' codigo=partida.codigo %}">Continuar para a próxima fase</a>
+    {% else %}
+    <a class="botao" href="{% url 'cacapalavras_campeao' codigo=partida.codigo %}">Ver resultado final</a>
+    {% endif %}
+</div>
+{% endblock %}

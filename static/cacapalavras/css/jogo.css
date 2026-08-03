@@ -1,0 +1,129 @@
+.painel-jogo {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+}
+
+.coluna-tabuleiro {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    /* Reserva o espaço do timer, que agora é position:fixed e não ocupa
+       mais lugar no fluxo — sem isso o grid "pularia" para cima. */
+    margin-top: 74px;
+}
+
+.coluna-lista { min-width: 220px; }
+
+.timer {
+    /* Fora do fluxo do documento: a pulsação (que muda font-size) não pode
+       empurrar o placar/grid, que são irmãos deste elemento. */
+    position: fixed;
+    top: 76px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 15;
+    font-family: var(--fonte-mono);
+    font-size: 32px;
+    font-weight: bold;
+    color: #fff;
+    padding: 6px 20px;
+    border-radius: var(--raio-arredondado);
+    background: rgba(0, 0, 0, 0.3);
+    border: 2px solid transparent;
+}
+
+@keyframes pulsar-alerta {
+    0%, 100% {
+        font-size: 32px;
+        color: #fff;
+        border-color: transparent;
+        text-shadow: none;
+    }
+    50% {
+        font-size: 40px;
+        color: #ff3b3b;
+        border-color: #fff;
+        text-shadow: 0 0 12px #ff3b3b, 0 0 4px #fff;
+    }
+}
+
+.timer-alerta { animation: pulsar-alerta 1s ease-in-out infinite; }
+
+.timer-zero {
+    font-size: 40px;
+    color: #ff3b3b;
+    border-color: #fff;
+}
+
+.placar { font-weight: bold; font-size: 18px; }
+
+.grid-cacapalavras {
+    display: grid;
+    grid-template-columns: repeat(var(--tamanho), minmax(26px, 40px));
+    gap: 3px;
+    background: rgba(0, 0, 0, 0.2);
+    padding: 10px;
+    border-radius: calc(var(--raio-arredondado) * 1.2);
+    user-select: none;
+    touch-action: none;
+}
+
+.celula {
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    color: #2b1055;
+    font-weight: bold;
+    font-family: var(--fonte-principal);
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background .15s ease;
+}
+
+.celula.selecionando { background: #ffe066; }
+
+@keyframes piscar-vermelho {
+    0%, 100% { opacity: 1; background: #ff4d4d; }
+    50% { opacity: 0.35; background: #ff4d4d; }
+}
+
+.celula.piscar-invalida { animation: piscar-vermelho .3s ease-in-out 2; }
+
+.lista-palavras {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.lista-palavras li {
+    background: rgba(255, 255, 255, 0.15);
+    padding: 8px 14px;
+    border-radius: var(--raio-arredondado);
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: opacity .3s ease;
+}
+
+.lista-palavras li.encontrada {
+    opacity: 0.35;
+    text-decoration: line-through;
+}
+
+.oponentes {
+    margin-top: 16px;
+    font-size: 14px;
+    opacity: 0.9;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}

@@ -1,0 +1,28 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block titulo %}House Games{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    {% block css_extra %}{% endblock %}
+</head>
+<body>
+    {% csrf_token %}
+    <header class="barra-topo">
+        <a href="{% url 'hub_index' %}" class="icone-inicio" title="Início" aria-label="Início">🏠</a>
+        <div class="barra-topo-titulo">{% block cabecalho %}House Games{% endblock %}</div>
+    </header>
+
+    <main class="conteudo">
+        {% block conteudo %}{% endblock %}
+    </main>
+
+    <footer class="barra-rodape">
+        {% block rodape %}{% endblock %}
+    </footer>
+
+    {% block js_extra %}{% endblock %}
+</body>
+</html>
