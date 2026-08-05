@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block titulo %}Aguardando{% endblock %}
+{% block cabecalho %}Aguardando{% endblock %}
+{% block conteudo %}
+<div class="cartao" style="text-align:center;">
+    <h2>Empate em disputa</h2>
+    <p>Alguns jogadores estão numa rodada extra de desempate. Aguarde só um instante...</p>
+</div>
+{% endblock %}
+{% block js_extra %}
+<script>
+    setInterval(() => window.location.reload(), 3000);
+</script>
+{% endblock %}

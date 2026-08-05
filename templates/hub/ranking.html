@@ -5,17 +5,18 @@
 <div class="cartao">
     <table class="tabela-resultado">
         <thead>
-        <tr><th>Jogador</th><th>Caça-Palavras</th><th>Total</th></tr>
+        <tr><th>Jogador</th><th>Caça-Palavras</th><th>Desembaralha</th><th>Total</th></tr>
         </thead>
         <tbody>
         {% for linha in linhas %}
         <tr>
             <td>{{ linha.apelido }}</td>
             <td>{{ linha.pontos_cacapalavras }}</td>
+            <td>{{ linha.pontos_desembaralha }}</td>
             <td><strong>{{ linha.pontos_total }}</strong></td>
         </tr>
         {% empty %}
-        <tr><td colspan="3">Nenhum jogador cadastrado ainda.</td></tr>
+        <tr><td colspan="4">Nenhum jogador cadastrado ainda.</td></tr>
         {% endfor %}
         </tbody>
     </table>

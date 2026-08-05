@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block titulo %}Desembaralha - Jogo{% endblock %}
+{% block cabecalho %}Fase {{ rodada.fase }} · Nível {{ rodada.nivel|capfirst }}{% endblock %}
+{% block css_extra %}
+<link rel="stylesheet" href="{% static 'desembaralha/css/jogo.css' %}">
+{% endblock %}
+{% block conteudo %}
+<div class="painel-jogo">
+    <div class="coluna-palavra">
+        <div id="timer" class="timer">{{ tempo_restante }}</div>
+        <div id="placar" class="placar">Pontos: <span id="pontos-valor">{{ quadro.pontos_rodada }}</span></div>
+
+        <div id="area-palavra" class="area-palavra">
+            <div id="sombra-efeito" class="sombra-efeito"></div>
+            <div id="fichas-embaralhadas" class="fichas-embaralhadas"></div>
+            <div id="tracos" class="tracos"></div>
+            <input id="entrada-oculta" class="entrada-oculta" type="text"
+                   autocomplete="off" autocapitalize="characters" autocorrect="off"
+                   spellcheck="false" inputmode="text" aria-label="Digite a palavra">
+        </div>
+
+        <div class="painel-resolvidas">
+            <h3>Palavras resolvidas</h3>
+            <ul id="lista-resolvidas" class="lista-resolvidas">
+                {% for palavra in resolvidas %}
+                <li>{{ palavra }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <div class="coluna-lateral">
+        <div id="oponentes" class="oponentes"></div>
+    </div>
+</div>
+{% endblock %}
+{% block rodape %}
+<a class="botao" href="{% url 'desembaralha_criar' %}">Reiniciar</a>
+{% endblock %}
+{% block js_extra %}
+<script>
+    const TEMPO_TOTAL = {{ tempo_total }};
+    let TEMPO_RESTANTE = {{ tempo_restante }};
+    const PALAVRA_EMBARALHADA_INICIAL = "{{ palavra_embaralhada }}";
+    const URL_VALIDAR = "{% url 'desembaralha_validar' codigo=partida.codigo %}";
+    const URL_ESTADO = "{% url 'desembaralha_estado' codigo=partida.codigo %}";
+    const URL_RESULTADO = "{% url 'desembaralha_resultado' codigo=partida.codigo %}";
+</script>
+<script src="{% static 'desembaralha/js/jogo.js' %}"></script>
+{% endblock %}

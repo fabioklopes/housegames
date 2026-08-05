@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block titulo %}Campeão{% endblock %}
+{% block cabecalho %}Temos um campeão!{% endblock %}
+{% block conteudo %}
+<div class="cartao" style="text-align:center;">
+    <div style="font-size:64px;">🏆</div>
+    <h1>{{ campeao.jogador.apelido }}</h1>
+    <p>Venceu o Desembaralha com {{ campeao.pontos_totais }} pontos!</p>
+    <a class="botao" href="{% url 'hub_index' %}">Voltar ao hub</a>
+</div>
+{% endblock %}

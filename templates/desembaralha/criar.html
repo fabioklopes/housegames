@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block titulo %}Desembaralha{% endblock %}
+{% block cabecalho %}Desembaralha{% endblock %}
+{% block conteudo %}
+<div class="cartao">
+    <h2>Nova partida</h2>
+    <p>Você será o mediador desta partida: gera o QR Code e acompanha o jogo, mas não participa.</p>
+    {% if erro %}<p class="erro">{{ erro }}</p>{% endif %}
+    <form method="post">
+        {% csrf_token %}
+        <label>Número de jogadores (2 a 8)
+            <input type="number" name="max_jogadores" min="2" max="8" value="8" autofocus>
+        </label>
+        <button class="botao" type="submit">Criar partida</button>
+    </form>
+</div>
+{% endblock %}
